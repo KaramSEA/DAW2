@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const map=new Map();
+
+        map.set('Karam', 20);
+        map.set('Mario', 24);
+        map.set('Juan', 19);
+        
+        console.log(map);
+
+        map.set('Juan', 29);
+        map.delete('Karam');
+        console.log(map);
+
+        let person='Jun';
+        if (map.has(person)) {
+            console.log(`${person}, si que existe`)
+        }
+        else{
+            console.log('no exite');
+        }
+
+        
+        console.log(map);
+        let busq=29;
+        for (const [clave,valor] of map) {
+            if (valor==busq) {
+                map.delete(clave)
+            }
+        }
+        console.log(map);
+
+
+
+
+        const array=[1,5,6,2,8,4];
+        let minNum=array[0];
+        for (const valor of array) {
+            if (minNum>valor) {
+                minNum=valor;
+            }
+        }
+        console.log(minNum);
+
+
+
+        
+        const arrayNombre=[
+            ['pepe',1234]
+            ['ana',456]
+            ['luis', 789]
+        ]
+
+        let usuario=prompt("introduce un nombre")
+
+        let enc=false;
+        let contador=0;
+        while ((enc!=false) && (contador < arrayNombre.length)) {
+            if (arrayNombre[contador]==usuario) {
+                enc=true;
+
+            }
+            else{
+                contador++;
+            }
+        }
+        if (enc) {
+            let clave=prompt("introduzca la clave")
+            if (clave==arrayNombre[contador]);
+        } else{
+            console.log("el usuario no existe")
+        }
+
+    </script>
+</body>
+</html>

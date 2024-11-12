@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .div{
+            height: 500px;
+            width: 505px;
+            overflow: hidden;
+            border: solid blue;
+            transition: all 2s;
+            margin-top: 50px;
+        }
+        img{
+            position: relative;
+            bottom: -20%;
+            left: 20%;
+            
+            height: 500px;
+            width: 505px;
+            
+        }
+        img:hover{
+            width: 505px;
+            position: relative;
+            top:0px;
+            left: 0px;
+            border: 4px solid darkblue;
+            transition: all 2s;
+        }
+        div:active{
+            width: 750px;
+            border: 10px solid yellowgreen;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <img src="/INTERFACES/imagenes/Sin título.jpeg"  alt="mo funciona">
+    </div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .contenedor{
+            margin: 5%;
+            background-color: rgb(221, 190, 200);
+            width: 90%;
+            height: 700px;
+            border-radius: 1%;
+            display: flex;
+            
+        }
+        img{
+            border-radius: 5%;
+            width: 550px;
+            height: 550px;
+            margin-top: 60px;
+            margin-left: 90px;
+        }
+        .formulario{
+            
+            margin-right: 90px;
+            margin-top: 4%;
+            margin-left: 7%;
+            flex-wrap: wrap;
+            
+        }
+        .items{
+            background-color: rgb(255, 168, 196);
+            border-bottom: red ;
+            width: 120%;
+            margin: 10px;
+            align-items: center;
+            height: 50px;
+            border-bottom: solid white ;
+            
+            
+        }
+        .itemTextArea{
+            background-color: rgb(255, 168, 196);
+            border-bottom: red ;
+            width: 120%;
+            margin: 10px;
+            align-items: center;
+            height: 200px;
+            border-bottom: solid purple;
+        }
+        .enviar{
+            height: 50px;
+            width: 120%;
+            margin: 10px;
+            background-color: rgb(255, 168, 196);
+            color: white;
+            border-bottom: solid white ;
+        }
+        .items:focus, .enviar:focus, .itemTextArea:focus { 
+            background: linear-gradient(aqua, red);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <img src="/INTERFACES/imagenes/LogoKaram.png" alt="NoFunciona">
+        <form class="formulario">
+            <input type="text" name="nombre" class="items" placeholder="Email">
+            <input type="text" name="apellidos" class="items" placeholder="Asunto">
+            <textarea name="hola" class="itemTextArea" placeholder="Mensaje"></textarea>
+            <input type="submit" name="enviar" class="enviar">
+        </form>
+
+    </div>
+</body>
+</html>

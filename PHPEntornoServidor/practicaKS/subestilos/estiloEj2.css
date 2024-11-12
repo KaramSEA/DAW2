@@ -1,0 +1,18 @@
+.min {
+    color: brown;        
+    font-style: italic; 
+}
+
+.max {
+    color: blue;       
+    font-weight: bold;  
+}
+.medio{
+    background-color: #ff5300;
+}
+.diagonal{
+    background-color: #FF0000;
+}
+.diagonal1{
+    background-color: #FFA600;
+}

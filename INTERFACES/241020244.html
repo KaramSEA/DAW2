@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            padding: 20px 5px;
+            background-color: blue;
+        }
+        .caja{
+            width: 100px;
+            height: 100px;
+            background-color: lime;
+            transition-property: all;
+            transition-duration: 1s,2s;
+            margin: 40px;
+            border: 2px solid #fff;
+            position: relative;
+            left: 0%;
+        }
+        .container:hover > .caja{
+            background-color: orange;
+            left: 90%;
+        }
+        .caja:first-child(1){
+            transition-timing-function:ease-in;
+        }
+        .caja:nth-child(2){
+            transition-timing-function: linear;
+        }
+        .caja:nth-child(3){
+            transition-timing-function: ease-in-out;
+        }
+        .caja:nth-child(4){
+            transition-timing-function: ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="caja"></div>
+        <div class="caja"></div>
+        <div class="caja"></div>
+        <div class="caja"></div>
+    </div>
+</body>
+</html>
