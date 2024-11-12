@@ -3,7 +3,7 @@ require "./Publicacion.php";
 class Revista extends Publicacion
 {
     private string $numRevistasPrestadas;
-    public function __construct($isbn, $title, $numPages,$numRevistasPrestadas)
+    public function __construct($isbn, $title, $numPages,$numRevistasPrestadas=0)
     {
         parent::__construct($isbn, $title,$numPages);
         $this->numRevistasPrestadas=$numRevistasPrestadas;
