@@ -1,5 +1,4 @@
 <?php
-require "./Publicacion.php";
 class Revista extends Publicacion
 {
     private string $numRevistasPrestadas;

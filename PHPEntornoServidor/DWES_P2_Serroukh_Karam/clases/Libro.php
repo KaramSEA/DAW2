@@ -1,5 +1,4 @@
 <?php
-require "./Publicacion.php";
 class Libro extends Publicacion
 {
     private string $autoria;
