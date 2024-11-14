@@ -1,10 +1,14 @@
 <?php 
-session_start();
-
+//requirimos otras classes antes de iniciar sesion
 require_once "./funciones/funciones.php";
 require_once "./clases/Publicacion.php";
 require_once "./clases/Libro.php";
 require_once "./clases/Revista.php";
+session_start();
+//session_destroy();
+
+
+
 
 $isbnLibros = $tituloLibros = $numPagLibros = $autoriaLibros = $numEjemplares= "";
 $isbnLibrosErr = $tituloLibrosErr = $numPagLibrosErr = $autoriaLibrosErr = $numEjemplaresErr= "";
@@ -15,7 +19,13 @@ $isbnRevistas = $tituloRevitas = $numPagRevistas = $numPrestados = "";
 $isbnRevistasErr = $tituloRevitasErr = $numPagRevistasErr = $numPrestadosErr = "";
 
 $erroresRevista=false;
-
+$libros=$revistas=[];
+if (!isset($_SESSION["libros1"])) {
+    $_SESSION["libros1"]=[];
+}
+if (!isset($_SESSION["revistas"])) {
+    $_SESSION["revistas"]=[];
+}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // Validar formulario de libros
@@ -49,11 +59,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['autoria']=$autoriaLibros;
             $_SESSION['numEjemplares']=$numEjemplares;
             
-            if (!isset($_SESSION["libros"])) {
-                $_SESSION["libros"] = [];
+            if (!isset($_SESSION["libros1"])) {
+                $_SESSION["libros1"] = [];
             }
-            $_SESSION["libros"][] = new Libro($isbnLibros, $tituloLibros, $numPagLibros, $autoriaLibros);
+
+            //creamos un objeto en la sesion de tipo libro con los datos ya validados y securizados
             
+            $_SESSION["libros1"][] = new Libro($isbnLibros, $tituloLibros, $numPagLibros, $autoriaLibros);;
+
+            
+
             //Dirigimos al usuario nuevamente al index.php para que se reseteen los valores del formulario
             header("Location: index.php");
             exit();
@@ -87,8 +102,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['numPrestados']=$numPrestados;
             
             
-            $revistas[]=new Revista($isbnRevistas,$tituloRevitas,$numPagRevistas);
-            $_SESSION["revistas"]=$revistas;
+            //creamos un objeto en la sesion de tipo revista con los datos ya validados y securizados
+
+            $_SESSION["revistas"][] = new Revista($isbnRevistas, $tituloRevitas, $numPagRevistas);;
             //Dirigimos al usuario nuevamente al index.php para que se reseteen los valores del formulario
             header("Location: index.php");
             exit();
@@ -142,30 +158,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="submit" name="enviar" value="Enviar">
         <input type="reset" value="Resetear"><br>
     </form>
-    <?php echo var_dump($_SESSION["libros"])?>
-    <table border="1">
-        <tr>
-            <th>ISBN:</th>
-            <th>titulo</th>
-            <th>numero de paginas</th>
-            <th>autoria</th>
-            <th>numEjemplares</th>
-        </tr>
-        <?php
-    if (isset($_SESSION["libros"]) && is_array($_SESSION["libros"])) {
-        foreach ($_SESSION["libros"] as $libro) {
-            
-            echo "<tr>";
-            echo "<td>" . $libro->getIsbn();echo "</td>";
-            echo "<td>" . $libro->getTitulo(); echo "</td>";
-            echo "<td>" . $libro->getNumPaginas(); echo "</td>";
-            echo "<td>" . $libro->getAutoria(); echo "</td>";
-            echo "<td>" . $libro->getNumEjemplares(); echo "</td>";
-            echo "</tr>";
-        }
-    }
-    ?>
-    </table>
+    
+    
 
     <form method="POST" action="<?php echo securizar($_SERVER["PHP_SELF"]); ?>">    
         <h1>Creación de revistas</h1>
@@ -192,6 +186,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="submit" name="enviar" value="Enviar">
         <input type="reset" value="Resetear"><br>
     </form>
+    <h1>Lista de Libros</h1>
+    <?php if (!empty($_SESSION['libros'])) { ?>
+        <table border="1">
+            <tr>
+                <th>ISBN</th>
+                <th>Título</th>
+                <th>Número de Páginas</th>
+                <th>Autoría</th>
+            </tr>
+            <?php foreach ($_SESSION['libros1'] as $libro) { ?>
+                <tr>
+                    <td><?php echo $libro->getIsbn(); ?></td>
+                    <td><?php echo $libro->getTitle(); ?></td>
+                    <td><?php echo $libro->getNumPages(); ?></td>
+                    <td><?php echo $libro->getAutoria(); ?></td>
+                </tr>
+            <?php } ?>
+        </table>
+    <?php } else { ?>
+        <p>No hay libros guardados todavía.</p>
+    <?php } ?>
+
+    <h1>Lista de Revistas</h1>
+    <?php if (!empty($_SESSION['revistas'])) { ?>
+        <table border="1">
+            <tr>
+                <th>ISBN</th>
+                <th>Título</th>
+                <th>Número de Páginas</th>
+            </tr>
+            <?php foreach ($_SESSION['revistas'] as $revista) { ?>
+                <tr>
+                    <td><?php echo $revista->getIsbn(); ?></td>
+                    <td><?php echo $revista->getTitle(); ?></td>
+                    <td><?php echo $revista->getNumPages(); ?></td>
+                </tr>
+            <?php } ?>
+        </table>
+    <?php } else { ?>
+        <p>No hay revistas guardadas todavía.</p>
+    <?php } ?>
+
     <?php include "./partes/pie.php"; ?>
 </body>
 </html>
